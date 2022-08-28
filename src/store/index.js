@@ -104,5 +104,9 @@ export const store = createStore({
       context.commit("deletCartProduct", product.id);
       localStorage.setItem("cart", JSON.stringify(this.state.cartProducts));
     },
+    clearCart(context) {
+      context.commit("setCartProducts", []);
+      localStorage.setItem("cart", JSON.stringify([]));
+    }
   },
 });

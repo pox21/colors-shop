@@ -6,7 +6,7 @@
         <BaseModalBg :is-open="isOpen" @click="isOpen = false" />
       </Teleport>
       <a href="/" class="logo header__logo hover-link">
-        <img src="/img/logo.png" alt="" class="logo__img" />
+        <img src="/img/logo.png" alt="Логотип Краски" class="logo__img" />
       </a>
       <TheNav
         class="header__nav"
@@ -24,13 +24,14 @@
       />
       <div v-if="isMobile">
         <BaseBtnActions
-          :class="'actions-btn--count'"
+          :class="cartTotalAmountProducts > 0 ? 'actions-btn--count' : ''"
           name="cart"
           :data-count="
             cartTotalAmountProducts > 99 ? 99 : cartTotalAmountProducts
           "
           @click="$emit('openModalCart')"
-        />
+        >
+        </BaseBtnActions>
       </div>
     </div>
   </header>
@@ -112,7 +113,8 @@ export default {
     cartTotalAmountProducts() {
       this.actionBtns.forEach((item) => {
         if (item.name === "cart") {
-          item.count = this.cartTotalAmountProducts;
+          item.count =
+            this.cartTotalAmountProducts > 99 ? 99 : this.cartTotalAmountProducts;
         }
       });
     },

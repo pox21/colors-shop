@@ -2,7 +2,7 @@
   <form
     class="cart"
     :class="isCartModalOpen ? 'cart--open' : ''"
-    @submit.prevent="foo"
+    @submit.prevent="sendOrder"
   >
     <div class="cart__header">
       <h2 class="cart__title">Корзина</h2>
@@ -16,8 +16,21 @@
     </div>
     <div class="cart__info">
       <div class="cart__info-header">
-        <span class="cart__count">4 товара</span>
-        <button class="cart__clear-btn btn-reset" type="button">
+        <span class="cart__count">
+          {{
+            `${
+              cartTotalAmountProducts > 0
+                ? cartTotalAmountProducts + " товаров"
+                : "корзина пуста :("
+            }`
+          }}</span
+        >
+        <button
+          class="cart__clear-btn btn-reset"
+          type="button"
+          @click="clearCart"
+          :disabled="cartProducts.length < 1"
+        >
           очистить список
         </button>
       </div>
@@ -41,7 +54,11 @@
           {{ numberFormat(cartTotalPrice) }} ₽
         </span>
       </div>
-      <button class="cart__buy-btn btn-reset" type="submit">
+      <button
+        class="cart__buy-btn btn-reset"
+        type="submit"
+        :disabled="cartProducts.length < 1"
+      >
         Оформить заказ
       </button>
     </div>
@@ -57,21 +74,31 @@ export default {
   props: {
     isCartModalOpen: Boolean,
   },
+  emits: ["sendOrder", "closeModalCart"],
   data() {
     return {
       cartProducts: [],
     };
   },
   computed: {
-    ...mapGetters(["getCartProducts", "cartTotalPrice"]),
+    ...mapGetters([
+      "getCartProducts",
+      "cartTotalPrice",
+      "cartTotalAmountProducts",
+    ]),
   },
   methods: {
-    ...mapActions(["deleteProduct"]),
+    ...mapActions(["deleteProduct", "clearCart"]),
     removeProd(product) {
       this.deleteProduct(product);
     },
     numberFormat(price) {
       return numberFormat(price);
+    },
+    sendOrder() {
+      this.$emit("sendOrder");
+      this.$emit("closeModalCart");
+      this.clearCart();
     },
   },
   watch: {
@@ -138,6 +165,10 @@ export default {
     opacity: 0.4;
     transition: opacity 0.2s ease-in-out;
 
+    &:disabled {
+      cursor: no-drop;
+    }
+
     &:hover,
     &:focus {
       opacity: 1;
@@ -164,7 +195,8 @@ export default {
     transition: border-color 0.2s ease-in-out;
 
     &:focus,
-    &:active {
+    &:active,
+    &:hover {
       border-color: #000;
     }
 
@@ -240,6 +272,10 @@ export default {
     padding: 20px;
     background-color: #7bb899;
     border-radius: 4px;
+
+    &:disabled {
+      cursor: no-drop;
+    }
 
     @include mobile {
       align-self: center;

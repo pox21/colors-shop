@@ -65,7 +65,7 @@ a {
     transition: transform 0.3s ease-in-out;
   }
 
-  &:focus::after {
+  &:focus::after, &:hover::after {
     transform: scaleX(1);
   }
 }

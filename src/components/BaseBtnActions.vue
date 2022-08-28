@@ -1,8 +1,5 @@
 <template>
-  <button
-    class="actions-btn btn-reset"
-    type="button"
-  >
+  <button class="actions-btn btn-reset" type="button">
     <BaseIcon :name="name" />
   </button>
 </template>
@@ -24,7 +21,7 @@ export default {
   width: 25px;
   height: 25px;
   border-radius: 100%;
-  border: 1px solid transparent;
+  border-bottom: 1px solid transparent;
   color: var(--color-text);
   transition: color 0.3s ease-in-out, border-color 0.3s ease-in-out;
 
@@ -55,7 +52,8 @@ export default {
     }
   }
 
-  &:focus {
+  &:focus,
+  &:hover {
     color: #475550;
     border-color: var(--hover-border);
   }

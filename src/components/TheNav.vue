@@ -65,14 +65,6 @@ export default {
     gap: 24px;
     max-width: 600px;
 
-    overflow: auto;
-
-    -ms-overflow-style: none;
-    overflow: -moz-scrollbars-none;
-    ::-webkit-scrollbar {
-      width: 0;
-    }
-
     @include laptop {
       padding: 10px 0;
       flex-direction: column;

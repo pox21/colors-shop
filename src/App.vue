@@ -6,7 +6,11 @@
     <TheCartModal
       :is-cart-modal-open="isCartModalOpen"
       @close-modal-cart="closeCart"
+      @send-order="isSendOrder = true"
     />
+    <BaseModalBg :is-open="isSendOrder">
+      <h2 class="send-order-title">Спасибо за покупку</h2>
+    </BaseModalBg>
     <BaseModalBg :is-open="isOpen" @click="closeCart" />
   </main>
   <TheFooter />
@@ -34,6 +38,7 @@ export default {
     return {
       isCartModalOpen: false,
       isOpen: false,
+      isSendOrder: false,
     };
   },
   methods: {
@@ -45,6 +50,13 @@ export default {
     closeCart() {
       this.isCartModalOpen = false;
       this.isOpen = false;
+    },
+  },
+  watch: {
+    isSendOrder() {
+      if (this.isSendOrder) {
+        setTimeout(() => (this.isSendOrder = false), 2000);
+      }
     },
   },
   mounted() {
@@ -64,5 +76,16 @@ export default {
   line-height: 88%;
   letter-spacing: -0.04em;
   color: var(--color-text);
+}
+
+.send-order-title {
+  margin: 0;
+  padding: 30px;
+  max-width: fit-content;
+  background-color: var(--color-bg);
+  font-size: 36px;
+  line-height: 1;
+  text-align: center;
+  color: #4b5754;
 }
 </style>

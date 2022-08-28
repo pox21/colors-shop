@@ -1,7 +1,7 @@
 <template>
   <article class="card">
     <div class="card__img-wrapper">
-      <img :src="product.img || ''" alt="" />
+      <img :src="product.img || ''" :alt="product.name" />
     </div>
     <div class="card__text-wrapper">
       <h3 class="card__title">{{ product.name }}</h3>
@@ -16,6 +16,7 @@
           @click="$emit('addToCart', product)"
         >
           <svg
+            class="card__btn--plus"
             width="20"
             height="20"
             viewBox="0 0 20 20"
@@ -37,6 +38,23 @@
               stroke-linejoin="round"
             />
           </svg>
+
+          <svg
+            class="card__btn--ok"
+            width="20"
+            height="20"
+            xmlns="http://www.w3.org/2000/svg"
+            fill="none"
+            viewBox="0 0 24 24"
+            stroke-width="1.5"
+            stroke="currentColor"
+          >
+            <path
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              d="M4.5 12.75l6 6 9-13.5"
+            />
+          </svg>
         </button>
       </div>
     </div>
@@ -48,7 +66,7 @@ export default {
   props: {
     product: Object,
   },
-  emits: ["addToCart"]
+  emits: ["addToCart"],
 };
 </script>
 
@@ -113,8 +131,27 @@ export default {
     opacity: 0;
     transition: transform 0.12s ease-in-out;
 
+    &--ok {
+      position: absolute;
+      opacity: 0;
+      transition: opacity 2s ease-in-out;
+    }
+    &--plus {
+      opacity: 1;
+      transition: opacity 5s ease-in-out;
+    }
+
     &:active {
       transform: scale(0.9);
+
+      .card__btn--plus {
+        opacity: 0;
+        transition: opacity 0.1s ease-in-out;
+      }
+      .card__btn--ok {
+        opacity: 1;
+        transition: opacity 0.1s ease-in-out;
+      }
     }
 
     @include mobile {

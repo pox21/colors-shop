@@ -7,7 +7,9 @@
     leave-from-class="modal-bg--to"
     leave-to-class="modal-bg--from"
   >
-    <div v-show="isOpen" class="modal-bg"></div>
+    <div v-if="isOpen" class="modal-bg">
+      <slot />
+    </div>
   </transition>
 </template>
 
@@ -30,25 +32,27 @@ export default {
 
 <style lang="scss" scoped>
 .modal-bg {
+  display: flex;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   top: 0;
   left: 0;
   right: 0;
   bottom: 0;
-  background: #000000;
-  opacity: 0.7;
+  background-color: rgba(0, 0, 0, 0.7);
   z-index: 2;
 
   &--to {
-    opacity: 0.7;
+    background-color: rgba(0, 0, 0, 0.7);
   }
 
   &--from {
-    opacity: 0;
+    background-color: rgba(0, 0, 0, 0);
   }
 
   &--active {
-    transition: opacity 0.3s ease-in-out;
+    transition: background-color 0.3s ease-in-out;
   }
 }
 </style>

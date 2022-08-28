@@ -49,7 +49,7 @@ export default {
   &__list {
     display: flex;
     align-items: center;
-    gap: 20px;
+    gap: 21px;
     margin: 0;
     padding: 0;
   }
@@ -64,6 +64,7 @@ export default {
 
     &:first-child::marker {
       content: "";
+      color: transparent;
     }
   }
 
@@ -87,7 +88,7 @@ export default {
     .bread-crumbs__link {
       color: var(--color-text);
     }
-    .bread-crumbs__item::marker {
+    .bread-crumbs__item::marker:not(:first-child) {
       color: var(--color-text);
     }
   }
