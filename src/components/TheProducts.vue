@@ -122,11 +122,10 @@ export default {
 
     sortAllProducts(type) {
       this.dataProducts.sort((product1, product2) => {
-        return product1[type] > product2[type]
-          ? -1
-          : product1[type] < product2[type]
-          ? 1
-          : 0;
+        if (type === "date") {
+          return new Date(product1[type]) > new Date (product2[type]) ? -1 : 1;
+        }
+        return product1[type] > product2[type] ? -1 : 1;
       });
     },
 
