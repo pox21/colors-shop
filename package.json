@@ -1,0 +1,28 @@
+{
+  "name": "colors-shop",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "axios": "^0.27.2",
+    "swiper": "^8.3.2",
+    "vue": "^3.2.37",
+    "vuex": "^4.0.2"
+  },
+  "browserslist": [
+    "defaults"
+  ],
+  "devDependencies": {
+    "@vitejs/plugin-vue": "^3.0.3",
+    "autoprefixer": "^10.4.8",
+    "normalize.css": "^8.0.1",
+    "sass": "^1.54.5",
+    "vite": "^3.0.7",
+    "vite-plugin-imagemin": "^0.6.1"
+  }
+}
