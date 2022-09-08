@@ -8,15 +8,21 @@
       @close-modal-cart="closeCart"
       @send-order="isSendOrder = true"
     />
-    <BaseModalBg :is-open="isSendOrder">
-      <h2 class="send-order-title">Спасибо за покупку</h2>
-    </BaseModalBg>
-    <BaseModalBg :is-open="isOpen" @click="closeCart" />
+    <Teleport to="body">
+      <BaseModalBg :is-open="isSendOrder">
+        <h2 class="send-order-title">Спасибо за покупку</h2>
+      </BaseModalBg>
+    </Teleport>
+    <Teleport to="body">
+      <BaseModalBg :is-open="isOpen" @click="closeCart" />
+    </Teleport>
   </main>
   <TheFooter />
+  <img :src="pict" alt="" />
 </template>
 
 <script>
+import pict from "./assets/img/123.png";
 import TheHeader from "./components/TheHeader.vue";
 import TheFooter from "./components/TheFooter.vue";
 import TheHero from "./components/TheHero.vue";
