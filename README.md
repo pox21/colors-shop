@@ -1,1 +1,1 @@
-# https://pox21.github.io/colors-shop-build/
+# https://pox21.github.io/colors-shop/

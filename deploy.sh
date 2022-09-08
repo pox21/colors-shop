@@ -13,7 +13,7 @@ cd build
 # echo 'www.example.com' > CNAME
 github.com/pox21/colors-shop
 git init
-git checkout -b main
+git checkout -b deploy
 git add -A
 git commit -m 'deploy'
 
